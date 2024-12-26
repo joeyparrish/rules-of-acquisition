@@ -1,0 +1,243 @@
+/*
+  The Rules of Acquisition @ ferengi.bible
+  Stylesheet
+  Copyright (C) 2024 Joey Parrish
+  Licensed under CC0 1.0 (see LICENSE)
+*/
+
+/* Basic colors, assuming light mode. */
+body {
+  background: white;
+  color: black;
+  font-family: "Roboto", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+* {
+  border-color: black;
+}
+
+/* Everything below is based on the root font size.  Make that scale with the
+ * viewport. */
+html {
+  font-size: calc(min(3vw,3vh));
+}
+
+/* Font for Ferengi glyphs */
+@font-face {
+  font-family: 'Ferengi';
+  src: url('Ferengi.woff2') format('woff2');
+  font-display: block;
+}
+.ferengi {
+  font-family: 'Ferengi';
+}
+
+/* Always hidden. */
+.hidden {
+  display: none;
+}
+
+/* Every page is hidden by default. */
+.page {
+  display: none;
+}
+
+/* The upsell dialog is hidden by default. */
+.upsell {
+  display: none;
+}
+
+/* A page whose input is checked is shown. */
+input:checked + .page {
+  display: flex;
+}
+
+/* A premium page whose input is checked has the upsell shown. */
+input:checked + .page.premium ~ .upsell {
+  display: flex;
+}
+
+/* Blur the rule in a "premium" page, and make the text unselectable. */
+.page.premium .rule {
+  filter: blur(0.1em) url(#distort);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Margin around the body */
+body {
+  margin: 1rem;
+}
+
+/* A smaller container for the main content. */
+#container {
+  position: relative; /* container for absolute-positioned children */
+  max-width: 30rem;
+  margin: auto;
+}
+
+/* Each page of the book, including the cover. */
+.page {
+  position: relative; /* container for absolute-positioned children */
+
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  border: 1px solid;
+  padding: 2rem;
+  height: 24rem;
+}
+
+.number {
+  font-size: 4rem;
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  right: 0;
+}
+
+.rule {
+  font-size: 2rem;
+  max-height: 6em;
+}
+
+/* Navigation links. */
+.nav-left, .nav-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  bottom: 1em;
+
+  background: none;
+  border: 1px solid;
+  border-radius: 0.5em;
+  cursor: pointer;
+
+  box-sizing: border-box;
+  font-size: 2rem;
+  line-height: 0.7em;
+  padding-bottom: 4px;
+
+  z-index: 2;
+}
+
+.nav-left {
+  left: 0.5rem;
+}
+
+.nav-right {
+  right: 0.5rem;
+}
+
+/* The upsell overlay for "premium" rules (that don't actually exist). */
+.upsell {
+  position: absolute;
+  bottom: 1rem;
+  /* Not wall-to-wall, to ensure nav buttons are exposed: */
+  left: 1rem;
+  right: 1rem;
+
+  /* Padding around the text, so the background scrim covers some of the rule
+   * beneath */
+  padding: 1rem;
+  padding-top: 6rem;
+  padding-bottom: 3rem;
+
+  font-size: 1.5rem;
+
+  flex-direction: column;
+  justify-content: end;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0.8) 25%,
+      rgba(255, 255, 255, 1));
+
+  text-align: center;
+  z-index: 1;
+}
+
+/* Cover material. */
+#p0 {
+  justify-content: start;
+}
+
+.title {
+  font-size: 3rem;
+  filter: drop-shadow(0 0 1rem white);
+}
+
+.title.ferengi {
+  /* Put this text in the background, behind the English title. */
+  position: absolute;
+  opacity: 40%;
+  font-size: 2.5rem;
+  line-height: 140%;
+  top: 0rem;
+  left: 2rem;
+  right: 2rem;
+  pointer-events: none;
+}
+
+.author {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.publisher {
+  margin-top: 1rem;
+  font-size: 0.7rem;
+}
+
+.promo {
+  position: absolute;
+  right: 1rem;
+  bottom: 2rem;
+  width: 10rem;
+  font-style: italic;
+  font-size: 1.5rem;
+  padding: 2rem;
+}
+
+.starburst {
+  position: absolute;
+
+  /* Combined with preserveAspectRatio="none", this stretches the SVG. */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Keep it under the promo text. */
+  z-index: -1;
+
+  /* This should look fine in both light and dark mode. */
+  fill: #888;
+}
+
+
+/* Color tweaks for dark mode. */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: black;
+    color: white;
+  }
+  * {
+    color: white;
+    border-color: white;
+  }
+  .title {
+    filter: drop-shadow(0 0 1rem black);
+  }
+  .upsell {
+    background: linear-gradient(
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.8) 25%,
+        rgba(0, 0, 0, 1));
+  }
+}

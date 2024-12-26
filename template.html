@@ -1,0 +1,118 @@
+<!--
+  The Rules of Acquisition @ ferengi.bible
+  HTML template
+  Copyright (C) 2024 Joey Parrish
+  Licensed under CC0 1.0 (see LICENSE)
+-->
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Recommendations for the head taken from https://htmlhead.dev/ -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{title}}</title>
+    <meta name="description" content="{{description}}">
+    <meta name="subject" content="The Ferengi Rules of Acquisition, as seen in Star Trek">
+    <link rel="canonical" href="{{url}}" />
+
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="{{url}}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{title}}">
+    <meta property="og:image" content="icon.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:alt" content="Logo of the Ferengi Alliance">
+    <meta property="og:description" content="{{description}}">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:author" content="Joey Parrish">
+    <meta name="twitter:card" content="summary">
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","description":"{{description}}","url":"{{url}}"}</script>
+
+    <meta name="generator" content="ViM and Python">
+    <link rel="author" href="https://joeyparrish.github.io/">
+
+    <link rel="icon" sizes="192x192" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="apple-touch-startup-image" href="icon.png">
+
+    <meta name="apple-mobile-web-app-title" content="{{title}}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="{{theme_color}}">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="{{theme_color}}">
+
+    <meta name="wap-font-scale" content="no">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+
+    <svg width="0" height="0">
+      <defs>
+        <filter id="distort">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="10,0" />
+          <xfeTurbulence baseFrequency="0.01 0.01" numOctaves="1" result="noise"  />
+        </filter>
+      </defs>
+    </svg>
+
+    <div id="container">
+
+      {% for rule in rules %}
+        <input class="hidden" type="radio" name="page"
+               id="i{{loop.index0}}"
+               {{'checked' if loop.first else ''}}>
+        <div class="page {{'premium' if loop.index0 and not rule else ''}}" id="p{{loop.index0}}">
+          {% if not loop.first %}
+            <button class="nav-left" data-nosnippet
+                    onclick="i{{loop.index0 - 1}}.checked = true; location.hash = '#{{loop.index0 - 1}}';"
+                    >&larr;</button>
+          {% endif %}
+          {% if loop.first %}
+            <div class="cover">
+              <h1 class="title ferengi">The Rules of Acquisition</h1>
+              <h1 class="title">The Rules of Acquisition</h1>
+              <address class="author">by <a rel="author">Grand Nagus Gint</a></address>
+              <address class="publisher">published by <a rel="author" href="https://joeyparrish.github.io/">Joey Parrish</a></address>
+
+              <aside class="promo">
+                <svg preserveAspectRatio="none" class="starburst" viewBox="0 0 122.88 122.88"><polygon fill-rule="evenodd" clip-rule="evenodd" points="19.44,50.16 8.22,30.72 30.72,30.72 30.72,8.13 50.16,19.44 61.44,0 72.72,19.44 92.16,8.13 92.16,30.72 114.75,30.72 103.44,50.16 122.88,61.44 103.44,72.72 114.75,92.16 92.16,92.16 92.16,114.66 72.72,103.44 61.44,122.88 50.16,103.44 30.72,114.66 30.72,92.16 8.22,92.16 19.44,72.72 0,61.44 19.44,50.16"/></svg>
+                An Alpha Quadrant best-seller!
+              </aside>
+            </div>
+          {% else %}
+            <div class="number">{{loop.index0}}.</div>
+            <div class="rule">
+              {% if rule %}
+                {{rule}}
+              {% else %}
+                {{placeholders[loop.index0 % (placeholders|length)]}}
+              {% endif %}
+            </div>
+          {% endif %}
+          {% if not loop.last %}
+            <button class="nav-right" data-nosnippet
+                    onclick="i{{loop.index0 + 1}}.checked = true; location.hash = '#{{loop.index0 + 1}}';"
+                    >&rarr;</button>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <div class="upsell">
+        This rule is only available to premium members.
+        Unlock exclusive content with a subscription to Ferenginar Prime!
+      </div>
+    </div>
+
+  </body>
+</html>
