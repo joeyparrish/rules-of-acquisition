@@ -9,7 +9,7 @@
 body {
   background: white;
   color: black;
-  font-family: "Roboto", serif;
+  font-family: 'Roboto', serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -24,7 +24,7 @@ html {
   font-size: calc(min(3vw,3vh));
 }
 
-/* Font for Ferengi glyphs */
+/* Font for Ferengi glyphs. */
 @font-face {
   font-family: 'Ferengi';
   src: url('Ferengi.woff2') format('woff2');
@@ -32,6 +32,16 @@ html {
 }
 .ferengi {
   font-family: 'Ferengi';
+}
+
+/* Font for arrows. */
+@font-face {
+  font-family: 'OpenArrow';
+  src: url('OpenArrow-Regular.woff2') format('woff2'),
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+2190-21ff;
 }
 
 /* Always hidden. */
@@ -118,11 +128,19 @@ body {
   cursor: pointer;
 
   box-sizing: border-box;
-  font-size: 2rem;
-  line-height: 1.4rem;
-  padding: 0.2rem 0.5rem;
-
   z-index: 2;
+
+  /* The unicode symbols I'm using for these end up misaligned in Roboto.
+   * They look fine in Arial, but Android doesn't have that.
+   * Rather than load a web font for Arial or something like it, use a very
+   * small font that only contains arrow glyphs. */
+  font-family: 'OpenArrow';
+  /* With a consitent font for these symbols, now I can make some small
+   * alignment adjustments and know that it will always be correct. */
+  font-size: 1.3rem;
+  line-height: 1.3rem;
+  padding: 0.2rem 0.8rem;
+  padding-top: 0.45rem;
 }
 
 .nav-left {
