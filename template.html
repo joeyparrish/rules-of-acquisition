@@ -76,7 +76,12 @@
           {% if not loop.first %}
             <button class="nav-left" data-nosnippet
                     onclick="i{{loop.index0 - 1}}.checked = true; location.hash = '#{{loop.index0 - 1}}';"
+                    title="Previous"
                     >&larr;</button>
+            <button class="nav-cover" data-nosnippet
+                    onclick="i0.checked = true; location.hash = '#';"
+                    title="Start over"
+                    >&#x219C;</button>
           {% endif %}
           {% if loop.first %}
             <div class="cover">
@@ -103,6 +108,7 @@
           {% if not loop.last %}
             <button class="nav-right" data-nosnippet
                     onclick="i{{loop.index0 + 1}}.checked = true; location.hash = '#{{loop.index0 + 1}}';"
+                    title="Next"
                     >&rarr;</button>
           {% endif %}
         </div>

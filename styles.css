@@ -104,7 +104,7 @@ body {
 }
 
 /* Navigation links. */
-.nav-left, .nav-right {
+.nav-left, .nav-right, .nav-cover {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,6 +131,12 @@ body {
 
 .nav-right {
   right: 0.5rem;
+}
+
+.nav-cover {
+  left: 0.5rem;
+  top: 0.5rem;
+  bottom: unset;
 }
 
 /* The upsell overlay for "premium" rules (that don't actually exist). */
