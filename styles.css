@@ -86,7 +86,7 @@ body {
   justify-content: center;
   text-align: center;
 
-  border: 1px solid;
+  border: 0.1rem solid;
   padding: 2rem;
   height: 24rem;
 }
@@ -111,33 +111,33 @@ body {
   align-items: center;
 
   position: absolute;
-  bottom: 1em;
 
   background: none;
-  border: 1px solid;
+  border: 0.1rem solid;
   border-radius: 0.5em;
   cursor: pointer;
 
   box-sizing: border-box;
   font-size: 2rem;
-  line-height: 0.7em;
-  padding-bottom: 4px;
+  line-height: 1.4rem;
+  padding: 0.2rem 0.5rem;
 
   z-index: 2;
 }
 
 .nav-left {
   left: 0.5rem;
+  bottom: 1em;
 }
 
 .nav-right {
   right: 0.5rem;
+  bottom: 1em;
 }
 
 .nav-cover {
   left: 0.5rem;
   top: 0.5rem;
-  bottom: unset;
 }
 
 /* The upsell overlay for "premium" rules (that don't actually exist). */
@@ -239,8 +239,8 @@ body {
   left: 0;
   right: 0;
   padding: 2rem;
-  border: 1px solid;
-  z-index: 2;
+  border: 0.1rem solid;
+  z-index: 3;
   /* Same font size as the upsell dialog. */
   font-size: 1.5rem;
 }
