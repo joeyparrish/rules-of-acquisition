@@ -12,7 +12,7 @@ Hosted at https://ferengi.bible/
 
 ## The Divine Treasury
 
-I always remember the 57th rule: "Good customers are as rare as latinum; treasure them."
+I always remember the 57th rule: _"Good customers are as rare as latinum; treasure them."_
 
 If you have enjoyed yourself here, and would like to help pay the bills, you can buy your way into The Divine Treasury!  This website costs $50/year for the domain registration, but if you donate even one slip of latinum, you may send a pull request to add your name and user icon below.
 
