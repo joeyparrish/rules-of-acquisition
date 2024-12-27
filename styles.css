@@ -221,6 +221,39 @@ body {
 }
 
 
+/* Sponsor dialog. */
+#sponsorDialog {
+  /* Hidden by default. */
+  display: none;
+  /* Covering the page. */
+  background: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  border: 1px solid;
+  z-index: 2;
+  /* Same font size as the upsell dialog. */
+  font-size: 1.5rem;
+}
+#sponsorDialog.shown {
+  display: unset;
+}
+#sponsorDialog div {
+  margin-top: 1rem;
+}
+#sponsorDialog div:first-child {
+  margin-top: 2rem;
+}
+#sponsorDialog #sponsorClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  margin-top: 0;
+}
+
 /* Color tweaks for dark mode. */
 @media (prefers-color-scheme: dark) {
   body {
@@ -239,5 +272,8 @@ body {
         rgba(0, 0, 0, 0),
         rgba(0, 0, 0, 0.8) 25%,
         rgba(0, 0, 0, 1));
+  }
+  #sponsorDialog {
+    background: black;
   }
 }
