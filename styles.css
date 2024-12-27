@@ -222,8 +222,7 @@ body {
   /* Keep it under the promo text. */
   z-index: -1;
 
-  /* This should look fine in both light and dark mode. */
-  fill: #888;
+  fill: #bbb;
 }
 
 
@@ -272,6 +271,10 @@ body {
   }
   .title {
     filter: drop-shadow(0 0 1rem black);
+  }
+  .starburst {
+    /* This should look fine in both light and dark mode. */
+    fill: #888;
   }
   .upsell {
     background: linear-gradient(
