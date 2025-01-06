@@ -50,13 +50,13 @@
 68	Risk doesn't always equal reward.
 69	Ferengi are not responsible for the stupidity of other races.
 74	Knowledge equals profit.
-75	Home is where the heart is., but the stars are made of latinum.
+75	Home is where the heart is, but the stars are made of latinum.
 76	Every once in a while, declare peace. It confuses the hell out of your enemies.
 77	If you break it, I'll charge you for it.
 79	Beware of the Vulcan greed for knowledge.
 82	The flimsier the product, the higher the price.
 85	Never let the competition know what you're thinking.
-87	Learn the customer's weaknesses, so that you can better take advantage of him.
+87	Learn the customer's weaknesses so that you can better take advantage of him.
 88	Vengeance will cost you everything.
 89	Ask not what your profits can do for you, but what you can do for your profits.
 91	Your boss is only worth what he pays you.
@@ -120,8 +120,8 @@
 240	Time, like latinum, is a highly limited commodity.
 242	More is good... all is better.
 243	Always leave yourself an out.
-248	The definition of insanity is trying the same failed scheme & expecting different results.
-255	A wife is luxury; a smart accountant a neccessity.
+248	The definition of insanity is trying the same failed scheme and expecting different results.
+255	A wife is luxury; a smart accountant, a neccessity.
 257	When the messenger comes to appropriate your profits, kill the messenger.
 261	A wealthy man can afford anything except a conscience.
 263	Never allow doubt to tarnish your lust for latinum.
