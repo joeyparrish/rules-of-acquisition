@@ -278,6 +278,12 @@ body {
   margin-top: 0;
 }
 
+#githubIcon {
+  height: 1em;
+  width: 1em;
+  stroke: black;
+}
+
 /* Color tweaks for dark mode. */
 @media (prefers-color-scheme: dark) {
   body {
@@ -292,7 +298,6 @@ body {
     filter: drop-shadow(0 0 1rem black);
   }
   .starburst {
-    /* This should look fine in both light and dark mode. */
     fill: #888;
   }
   .upsell {
@@ -303,5 +308,8 @@ body {
   }
   #sponsorDialog {
     background: black;
+  }
+  #githubIcon {
+    stroke: white;
   }
 }
