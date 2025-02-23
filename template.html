@@ -75,11 +75,11 @@
         <div class="page {{'premium' if loop.index0 and not rule else ''}}" id="p{{loop.index0}}">
           {% if not loop.first %}
             <button class="nav-left" data-nosnippet
-                    onclick="i{{loop.index0 - 1}}.checked = true; location.hash = '#{{loop.index0 - 1}}';"
+                    onclick="go({{loop.index0 - 1}});"
                     title="Previous"
                     >&larr;</button>
             <button class="nav-cover" data-nosnippet
-                    onclick="i0.checked = true; location.hash = '#';"
+                    onclick="go(0);"
                     title="Start over"
                     >&#x21B6;</button>
           {% endif %}
@@ -110,7 +110,7 @@
           {% endif %}
           {% if not loop.last %}
             <button class="nav-right" data-nosnippet
-                    onclick="i{{loop.index0 + 1}}.checked = true; location.hash = '#{{loop.index0 + 1}}';"
+                    onclick="go({{loop.index0 + 1}});"
                     title="Next"
                     >&rarr;</button>
           {% endif %}
