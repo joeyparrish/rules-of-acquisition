@@ -33,12 +33,15 @@ def main():
       autoescape=jinja2.select_autoescape())
 
   # Load the rules.
+  extant_rules=[]
   with open('rules.txt', 'r') as f:
     rule_lines = f.read().strip().split('\n')
     rules = [None] * (LAST_RULE + 1)
     for line in rule_lines:
       number, rule = line.split('\t')
-      rules[int(number)] = rule
+      number = int(number)
+      rules[number] = rule
+      extant_rules.append(number)
 
   # Load the HTML template.
   template = env.get_template('template.html')
@@ -46,6 +49,7 @@ def main():
   # Render to index.html
   with open('index.html', 'w') as f:
     f.write(template.render(
+        extant_rules=extant_rules,
         rules=rules,
         title=TITLE,
         description=DESCRIPTION,

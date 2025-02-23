@@ -115,7 +115,7 @@ body {
 }
 
 /* Navigation links. */
-.nav-left, .nav-right, .nav-cover {
+.nav-left, .nav-right, .nav-cover, .nav-random {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -155,6 +155,11 @@ body {
 
 .nav-cover {
   left: 0.5rem;
+  top: 0.5rem;
+}
+
+.nav-random {
+  right: 0.5rem;
   top: 0.5rem;
 }
 
@@ -278,10 +283,11 @@ body {
   margin-top: 0;
 }
 
-#githubIcon {
+.icon {
   height: 1em;
   width: 1em;
   stroke: black;
+  stroke-width: 1.7px;
 }
 
 /* Color tweaks for dark mode. */
@@ -309,7 +315,7 @@ body {
   #sponsorDialog {
     background: black;
   }
-  #githubIcon {
+  .icon {
     stroke: white;
   }
 }

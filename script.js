@@ -8,6 +8,11 @@ function go(pageNumber) {
   }
 }
 
+function goRandom() {
+  const index = Math.floor(Math.random() * extantRules.length);
+  go(extantRules[index]);
+}
+
 // Only called on explicit URL bar changes and on page load.
 // Loads the page called for by the URL change.
 function onhashchange() {

@@ -53,6 +53,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="styles.css">
+    <script>window.extantRules={{ extant_rules }}</script>
     <script src="script.js"></script>
   </head>
   <body>
@@ -74,14 +75,18 @@
                {{'checked' if loop.first else ''}}>
         <div class="page {{'premium' if loop.index0 and not rule else ''}}" id="p{{loop.index0}}">
           {% if not loop.first %}
-            <button class="nav-left" data-nosnippet
-                    onclick="go({{loop.index0 - 1}});"
-                    title="Previous"
-                    >&larr;</button>
             <button class="nav-cover" data-nosnippet
                     onclick="go(0);"
                     title="Start over"
                     >&#x21B6;</button>
+            <button class="nav-random" data-nosnippet
+                    onclick="goRandom();"
+                    title="Random"
+                    >{% include 'shuffle.svg' %}</button>
+            <button class="nav-left" data-nosnippet
+                    onclick="go({{loop.index0 - 1}});"
+                    title="Previous"
+                    >&larr;</button>
           {% endif %}
           {% if loop.first %}
             <a class="nav-left"
