@@ -9,12 +9,16 @@ import math
 import subprocess
 
 
+# Split text over many lines, but balance it.
 def balance(text, max_chars_per_line, initial_leftovers=0):
+  # If it fits on one line, we're done.
   if len(text) <= max_chars_per_line:
     return text
 
+  # Split the text into words.
   words = text.split(' ')
 
+  # Count the number of lines we should need.
   num_lines = 1
   accumulated_len = -1
   for word in words:
@@ -23,19 +27,24 @@ def balance(text, max_chars_per_line, initial_leftovers=0):
       accumulated_len = len(word)
       num_lines += 1
 
+  # Compute our ideal line length.
   ideal_line_len = math.ceil(len(text) / num_lines)
   lines = []
   current_line = ''
   leftovers = initial_leftovers
 
   for word in words:
+    # This line can be the ideal length + any letter not used from previous
+    # lines, up to the hard maximum line length.
     this_line_max_len = min(ideal_line_len + leftovers, max_chars_per_line)
 
+    # If this word would overflow the line, stop and store a line of words.
     if len(current_line) + len(word) > this_line_max_len:
       leftovers = this_line_max_len - len(current_line)
       lines.append(current_line)
       current_line = ''
 
+    # Add to the current line.
     if current_line:
       current_line += ' '
     current_line += word
@@ -44,10 +53,12 @@ def balance(text, max_chars_per_line, initial_leftovers=0):
     lines.append(current_line)
 
   if len(lines) > num_lines:
-    if initial_leftovers >= max_chars_per_line:
-      raise RuntimeError('Line overflow! ' + repr(text))
-    else:
+    # If we ended up with too many lines, try again with one more extra
+    # character allocated to the first line.
+    if initial_leftovers < max_chars_per_line:
       return balance(text, max_chars_per_line, initial_leftovers + 1)
+    else:
+      raise RuntimeError('Line overflow! ' + repr(text))
 
   return '\n'.join(lines)
 
