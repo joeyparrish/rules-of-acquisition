@@ -64,44 +64,57 @@ def balance(text, max_chars_per_line, initial_leftovers=0):
 
 
 def generate_image(text, font_size, url, output):
-      subprocess.check_call([
-        'magick',
-        # White business card sized thing.
-        # 3.34 x 1.84 inches @ 300 DPI (safe area)
-        '-size', '1002x552',
-        'xc:white',
-        # Settings for future stages
-        '-background', 'transparent',
-        '-fill', 'black',
-        '-font', 'cards/RobotoCondensed-Bold.ttf',
-        # The rule itself
-        '-gravity', 'center',
-        '-pointsize', str(font_size),
-        '-size', '1002x552',
-        'caption:{}'.format(text),
-        '-gravity', 'none', '-composite',
-        # The URL
-        '-gravity', 'south',
-        '-pointsize', '50',
-        '-size', '1002x534',
-        'caption:{}'.format(url),
-        '-gravity', 'none', '-composite',
-        # Expand to the full bleed size, centering the previous stage
-        '-gravity', 'center',
-        '-background', 'white',
-        '-extent', '1098x648',
-        # Add a border overlay
-        'cards/border.png',
-        '-gravity', 'none', '-composite',
-        # Output with palette for smallest possible image size
-        '-colors', '4',
-        'png8:{}'.format(output),
-      ])
+  # moo.com safe area:               3.340" x 1.840"
+  # makeplayingcards.com safe area:  3.260" x 1.760"
+  # @ 300 DPI:
+  SAFE_AREA = '978x528'
 
-      # Further optimize the image.
-      subprocess.check_call([
-        'optipng', '-o2', output,
-      ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+  # cut size:                        3.500" x 2.000"
+  CUT_AREA = '1050x600'
+
+  # moo.com full bleed:              3.660" x 2.160"
+  # makeplayingcards.com full bleed: 3.740" x 2.240"
+  BLEED_AREA = '1122x672'
+
+  URL_LOCATION = '978x490'
+
+  subprocess.check_call([
+    'magick',
+    # White business card sized thing.
+    '-size', SAFE_AREA,
+    'xc:white',
+    # Settings for future stages
+    '-background', 'transparent',
+    '-fill', 'black',
+    '-font', 'cards/RobotoCondensed-Bold.ttf',
+    # The rule itself
+    '-gravity', 'center',
+    '-pointsize', str(font_size),
+    '-size', SAFE_AREA,
+    'caption:{}'.format(text),
+    '-gravity', 'none', '-composite',
+    # The URL
+    '-gravity', 'south',
+    '-pointsize', '50',
+    '-size', URL_LOCATION,
+    'caption:{}'.format(url),
+    '-gravity', 'none', '-composite',
+    # Expand to the full bleed size, centering the previous stage
+    '-gravity', 'center',
+    '-background', 'white',
+    '-extent', BLEED_AREA,
+    # Add a border overlay
+    'cards/border.png',
+    '-gravity', 'center', '-composite',
+    # Output with palette for smallest possible image size
+    '-colors', '4',
+    'png8:{}'.format(output),
+  ])
+
+  # Further optimize the image.
+  subprocess.check_call([
+    'optipng', '-o2', output,
+  ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def main():
