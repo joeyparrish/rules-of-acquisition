@@ -127,9 +127,12 @@ def main():
       print('\r#{}...'.format(number), end='')
 
       balanced_rule = balance(rule, 20)
-      font_size = 100
+      font_size = 90
 
       if len(balanced_rule.split('\n')) > 4:
+        balanced_rule = balance(rule, 35)
+        font_size = 60
+      elif len(balanced_rule.split('\n')) > 3:
         balanced_rule = balance(rule, 30)
         font_size = 70
       elif len(balanced_rule.split('\n')) > 2:
