@@ -114,8 +114,13 @@ body {
   max-height: 6em;
 }
 
+a, button {
+  /* Prevent a flash of blue when clicking a button, especially on mobile. */
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Navigation links. */
-.nav-left, .nav-right, .nav-cover, .nav-random {
+.nav-left, .nav-right, .nav-cover, .nav-random, .nav-search {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -158,9 +163,81 @@ body {
   top: 0.5rem;
 }
 
+.nav-search,
 .nav-random {
   right: 0.5rem;
   top: 0.5rem;
+}
+
+/* Search dialog, modeled on #sponsorDialog. */
+#searchDialog {
+  display: none;
+  background: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  border: 0.1rem solid;
+  z-index: 3;
+  font-size: 1.5rem;
+
+  flex-direction: column;
+}
+#searchDialog.shown {
+  display: flex;
+}
+#searchInput {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  background: none;
+  border: 0.1rem solid;
+  border-radius: 0.3rem;
+  margin-top: 2rem;
+
+  /* Make the focus outline match the font color. */
+  outline-color: black;
+}
+/* The native "clear" button is browser-colored and ignores our theme. Replace
+ * it with our own X mask painted in currentColor, so it matches the font in
+ * both light and dark mode. */
+#searchInput::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0.75em;
+  width: 0.75em;
+  cursor: pointer;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M6 6 18 18M18 6 6 18'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M6 6 18 18M18 6 6 18'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+#searchResults {
+  margin-top: 1rem;
+  overflow-y: auto;
+  flex: 1;
+}
+#searchClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.search-result {
+  padding: 0.5rem 0;
+  cursor: pointer;
+
+  /* Keep each result on one line; truncate long rules. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.search-result:hover {
+  text-decoration: underline;
+}
+.search-empty {
+  padding: 0.5rem 0;
+  font-style: italic;
+  opacity: 0.7;
 }
 
 /* The upsell overlay for "premium" rules (that don't actually exist). */
@@ -300,6 +377,9 @@ body {
     color: white;
     border-color: white;
   }
+  #searchInput {
+    outline-color: white;
+  }
   .title {
     filter: drop-shadow(0 0 1rem black);
   }
@@ -313,6 +393,9 @@ body {
         rgba(0, 0, 0, 1));
   }
   #sponsorDialog {
+    background: black;
+  }
+  #searchDialog {
     background: black;
   }
   .icon {

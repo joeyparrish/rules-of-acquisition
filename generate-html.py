@@ -6,6 +6,7 @@
 # Licensed under CC0 1.0 (see LICENSE)
 
 import jinja2
+import json
 import subprocess
 
 
@@ -43,6 +44,10 @@ def main():
       rules[number] = rule
       extant_rules.append(number)
 
+  # Compact [number, text] pairs for the client-side search index.
+  # Real rules only, so placeholder/"premium" rules never appear in search.
+  rules_data = [[number, rules[number]] for number in extant_rules]
+
   # Load the HTML template.
   template = env.get_template('template.html')
 
@@ -51,6 +56,7 @@ def main():
     f.write(template.render(
         extant_rules=extant_rules,
         rules=rules,
+        rules_data_json=json.dumps(rules_data),
         title=TITLE,
         description=DESCRIPTION,
         url=URL,

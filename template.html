@@ -54,6 +54,7 @@
 
     <link rel="stylesheet" href="styles.css">
     <script>window.extantRules={{ extant_rules }}</script>
+    <script>window.rulesData={{ rules_data_json | safe }}</script>
     <script src="script.js"></script>
   </head>
   <body>
@@ -92,6 +93,10 @@
             <a class="nav-left"
                href="https://github.com/joeyparrish/rules-of-acquisition"
                title="Source">{% include 'github.svg' %}</a>
+            <button class="nav-search" data-nosnippet
+                    onclick="openSearch(event);"
+                    title="Search"
+                    >{% include 'search.svg' %}</button>
             <div class="cover">
               <h1 class="title ferengi">The Rules of Acquisition</h1>
               <h1 class="title">The Rules of Acquisition</h1>
@@ -144,6 +149,13 @@
           (But don't forget the 19th rule: <i>"Satisfaction is not guaranteed."</i>)
         </div>
         <div id="sponsorClose"><a href="#" onclick="unsponsor(event)">(close)</a></div>
+      </div>
+
+      <div id="searchDialog">
+        <input id="searchInput" type="search" placeholder="Search the rules&hellip;"
+               oninput="renderSearch()" onkeydown="onSearchKey(event)">
+        <div id="searchResults"></div>
+        <div id="searchClose"><a href="#" onclick="closeSearch(event)">(close)</a></div>
       </div>
     </div>
 
