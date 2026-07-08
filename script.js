@@ -72,6 +72,23 @@ function searchRules(query) {
   });
 }
 
+// Inserts a highlight (mark element) into an element's text content.  It is
+// assumed to have just one child, a TextNode.
+function highlightText(element, keyword) {
+  keyword = keyword.trim().toLowerCase();
+  const keywordOffset = element.textContent.toLowerCase().indexOf(keyword);
+  if (keywordOffset == -1) return;
+
+  // The "before" text stays in this after we split into the other two nodes.
+  const beforeTextNode = element.firstChild;
+  const keywordTextNode = beforeTextNode.splitText(keywordOffset);
+  const afterTextNode = keywordTextNode.splitText(keyword.length);
+
+  const mark = document.createElement('mark');
+  mark.appendChild(keywordTextNode);
+  element.insertBefore(mark, afterTextNode);
+}
+
 // Re-renders the results list from the current query.
 function renderSearch() {
   const results = document.getElementById('searchResults');
@@ -93,8 +110,11 @@ function renderSearch() {
     const number = entry[0];
     const text = entry[1];
     const row = document.createElement('div');
+
     row.className = 'search-result';
     row.textContent = number + '. ' + text;
+    highlightText(row, query);
+
     row.onclick = function() {
       go(number);
       closeSearch();

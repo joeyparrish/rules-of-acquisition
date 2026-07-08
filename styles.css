@@ -367,6 +367,11 @@ a, button {
   stroke-width: 1.7px;
 }
 
+mark {
+  background: #ddd;
+  font-weight: bold;
+}
+
 /* Color tweaks for dark mode. */
 @media (prefers-color-scheme: dark) {
   body {
@@ -400,5 +405,8 @@ a, button {
   }
   .icon {
     stroke: white;
+  }
+  mark {
+    background: #222;
   }
 }
