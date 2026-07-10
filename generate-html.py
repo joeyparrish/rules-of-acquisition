@@ -7,6 +7,7 @@
 
 import jinja2
 import json
+import os
 import subprocess
 
 
@@ -17,6 +18,11 @@ TITLE = "The Rules of Acquisition"
 DESCRIPTION = "The Ferengi Rules of Acquisition, as handed down by Grand Nagus Gint; every Ferengi business transaction is governed by these rules to ensure a fair and honest deal for all parties concerned."
 URL = "https://ferengi.bible/"
 THEME_COLOR = "#a5836a"
+# Google Analytics 4 Measurement ID (looks like "G-XXXXXXXXXX"). Leave empty to
+# omit the analytics tag entirely (e.g. for local builds). Create a GA4 property
+# at https://analytics.google.com/ to get this ID; it is a public identifier,
+# safe to commit. Overridable via the GA_MEASUREMENT_ID environment variable.
+ANALYTICS_ID = os.environ.get("GA_MEASUREMENT_ID", "")
 # Placeholder text for rules that don't exist.
 PLACEHOLDERS = [
   "No such rule in Star Trek canon, but you can't see this because we blurred it. The upsell is a joke, hu-man! You can't subscribe.",
@@ -61,6 +67,7 @@ def main():
         description=DESCRIPTION,
         url=URL,
         theme_color=THEME_COLOR,
+        analytics_id=ANALYTICS_ID,
         placeholders=PLACEHOLDERS))
 
   # Minify index.html.
