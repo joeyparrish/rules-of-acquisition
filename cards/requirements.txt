@@ -1,0 +1,14 @@
+# Python dependencies for ../generate-cards.py (the card image generator).
+#
+# Install into a project virtualenv at the repo root:
+#     python3 -m venv .venv
+#     .venv/bin/pip install -r cards/requirements.txt
+#
+# These are the only packages the generator imports directly; pip resolves the
+# rest (cairocffi, cffi, cssselect2, defusedxml, tinycss2, ...) automatically.
+# Pinned to the versions the committed card images were rendered with. Note that
+# byte-identical output also depends on the system libcairo (Homebrew "cairo"),
+# which pip does not manage -- see cards/AGENTS.md.
+
+cairosvg==2.8.2
+Pillow==11.3.0

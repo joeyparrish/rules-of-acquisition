@@ -1,4 +1,5 @@
 index.html
+.venv/
 *.swp
 *.swo
 *~

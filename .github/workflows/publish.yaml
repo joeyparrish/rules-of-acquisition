@@ -31,7 +31,9 @@ jobs:
         run: ./generate-html.py
 
       - name: Strip
-        run: rm -rf .git .github template.html header README.md
+        # The generated card images (~138 MB) live in the repo but are not served
+        # by the site; the print-your-own flow is browsed from the GitHub repo.
+        run: rm -rf .git .github template.html header README.md cards
 
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v3
