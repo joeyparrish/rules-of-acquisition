@@ -28,6 +28,8 @@ jobs:
         run: sudo apt -y install python3-jinja2
 
       - name: Build
+        env:
+          GA_MEASUREMENT_ID: ${{ secrets.GA_MEASUREMENT_ID }}
         run: ./generate-html.py
 
       - name: Strip
