@@ -48,6 +48,14 @@ FONT_DIR = os.path.join(HERE, "cards", "fonts")
 BODONI_TTF = os.path.join(FONT_DIR, "BodoniModa-VariableFont_opsz,wght.ttf")
 PLEX_TTF = os.path.join(FONT_DIR, "IBMPlexMono-Regular.ttf")
 
+# A subset of rules that get printed, so that the cards fit in a box.
+from cards.printed_rules import PRINTED_RULES
+
+# Make sure there are no duplicate rules and not too many.
+MAX_PRINTED_RULES = 120
+assert(len(PRINTED_RULES) == len(set(PRINTED_RULES)))
+assert(len(PRINTED_RULES) <= MAX_PRINTED_RULES)
+
 
 # *** Geometry ***
 
@@ -509,11 +517,24 @@ def make_preview(src_png, dst_png):
 
 def load_rules():
     """Read rules.txt (tab-separated number<TAB>text) into [(number, text), ...]."""
-    out = []
+    all_rules = []
+    all_numbers = set()
+
     with open(os.path.join(HERE, "rules.txt")) as f:
         for line in f.read().strip().split("\n"):
-            number, text = line.split("\t")
-            out.append((int(number), text))
+            number_str, text = line.split("\t")
+            number = int(number_str)
+            all_rules.append((number, text))
+            all_numbers.add(number)
+
+    # Make sure all the rules in PRINTED_RULES are valid
+    for number in PRINTED_RULES:
+        assert(number in all_numbers)
+
+    # Now filter the rules
+    keepers = set(PRINTED_RULES)
+    out = list(filter(lambda t: t[0] in keepers, all_rules))
+    assert(len(out) <= MAX_PRINTED_RULES)
     return out
 
 
