@@ -38,7 +38,7 @@ Files: `dark/front.png` and `dark/backs/NNN.png`
    `https://ferengi.bible/#NN` (for example
    [Rule 62](https://ferengi.bible/#62)).
 
-If asked, order a duplex print with a long-edge flip so the front and back line
+If asked, order a duplex print with a short-edge flip so the front and back line
 up.
 
 ## Print specifications
