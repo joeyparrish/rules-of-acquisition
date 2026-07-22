@@ -10,5 +10,5 @@
 # byte-identical output also depends on the system libcairo (Homebrew "cairo"),
 # which pip does not manage -- see cards/AGENTS.md.
 
-cairosvg==2.8.2
-Pillow==11.3.0
+cairosvg==2.9.0
+Pillow==12.3.0
